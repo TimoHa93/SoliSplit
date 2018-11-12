@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>Login</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>	
+		<script type="text/javascript">
+			$(function () {
+				$("#registerBtn").click(function() {
+					window.location.href = '/register';
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<form action="" method="post">
+				<fieldset>
+					<legend>Please Login</legend>
+        			<!-- use param.error assuming FormLoginConfigurer#failureUrl contains the query parameter error -->
+        			<div th:if="${param.error != null}" style="color: red;">
+            			<div>
+                			Failed to login.
+                			<div th:if="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+                 				 Reason: <span th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+                			</div>
+            			</div>
+        			</div>
+        			<!-- the configured LogoutConfigurer#logoutSuccessUrl is /login?logout and contains the query param logout -->
+        			<div th:if="${param.logout != null}">
+            			<div>
+                			You have been logged out.
+            			</div>
+        			</div>
+        			<p>
+        			<label for="username">Username</label>
+        			<input type="text" th:field="${user.username}"/>
+        			</p>
+        			<p>
+        			<label for="password">Password</label>
+        			<input type="password" th:field="${user.password}"/>
+        			</p>
+        			<!-- if using RememberMeConfigurer make sure remember-me matches RememberMeConfigurer#rememberMeParameter -->
+        			<p>
+        			<label for="remember-me">Remember Me?</label>
+        			<input type="checkbox" id="remember-me" name="remember-me"/>
+			        </p>
+			        <div>
+			            <button type="submit" class="btn">Log in</button>
+			        	<button id="registerBtn" type="button" class="btn btn-primary">Register</button>
+			        </div>
+				
+				</fieldset>	
+			</form>
+		</div>
+	</body>
+	
+</html>
+
